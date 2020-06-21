@@ -17,10 +17,12 @@ GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 # Event to detect wind (4 ticks per revolution)
 GPIO.add_event_detect(17, GPIO.BOTH) 
 
+
 def wind_trig(self):
     global wind_tick
     wind_tick += 1
- 
+
+
 GPIO.add_event_callback(17, wind_trig)  
 
 try:
