@@ -3,10 +3,13 @@ import busio
 import adafruit_bme280
 import time
 
-i2c = busio.I2C(board.SCL, board.SDA)
-sensor = adafruit_bme280.Adafruit_BME280_I2C(i2c, address=0x76)
+class get_temp_pres():
+    def __init__(self):
+        self.i2c = busio.I2C(board.SCL, board.SDA)
+        self.sensor = adafruit_bme280.Adafruit_BME280_I2C(self.i2c, address=0x76)
 
-while True:
-    print("Temperature: {}, Pressure: {}, Altitude: {}".format(sensor.temperature, sensor.pressure, sensor.altitude))
-    time.sleep(1)
+    def get_bme280(self):
+        return self.sensor.temperature, self.sensor.pressure, self.sensor.altitude
+
+    
 

@@ -3,44 +3,42 @@ import datetime
 import RPi.GPIO as GPIO
 from statistics import mean
 
-# Initialization
-wind_tick = 0   # Used to count the number of times the wind speed input is triggered
-interval = 3    # Seconds to be waited between speed measurements
-mov_avg = 8    # Every 24 second average
-ws_readings = []
-samples = 0
 
-# Setup input GPIO pin
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+class wind_speed():
+    
+    def __init__(self):
+        # Initialization
+        self.wind_tick = 0   # Used to count the number of times the wind speed input is triggered
+        self.interval = 3    # Seconds to be waited between speed measurements
+        self.mov_avg = 8    # Every 24 second average
+        self.ws_readings = []
+        self.samples = 0
 
-# Event to detect wind (4 ticks per revolution)
-GPIO.add_event_detect(17, GPIO.BOTH) 
+        # Setup input GPIO pin
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+        # Event to detect wind (4 ticks per revolution)
+        GPIO.add_event_detect(17, GPIO.BOTH) 
+        GPIO.add_event_callback(17, self.wind_trig) 
 
-def wind_trig(self):
-    global wind_tick
-    wind_tick += 1
+    def wind_trig(self, pin):   # test is the pin number, in this case 17, passed by the callback function
+        global wind_tick
+        self.wind_tick += 1
 
-
-GPIO.add_event_callback(17, wind_trig)  
-
-try:
-    while True:
-        time.sleep(interval)
-        wind_speed = (wind_tick * 1.2) / interval
-        wind_tick = 0
-        ws_readings.append(round(wind_speed, 2))
-        samples +=1
-        if len(ws_readings) == mov_avg: 
-            avg_wind_speed = mean(ws_readings) # averaging over 8 sample of 3 second wind
-            gust_speed = max(ws_readings)
-            print(ws_readings)
-            ws_readings.pop(0)
-            print("Average Wind Speed: {:.2f} km/h and Wind Gust {}".format(round(avg_wind_speed, 2), round(gust_speed, 2)))
-            #TODO: Tx with Direwolf
-            
-except KeyboardInterrupt:
-    print("interrupted")
-    GPIO.cleanup()
+    
+    def run(self):
+        while True:
+            time.sleep(self.interval)
+            self.wind_speed = (self.wind_tick * 1.2) / self.interval
+            self.wind_tick = 0
+            self.ws_readings.append(round(self.wind_speed, 2))
+            self.samples +=1
+            if len(self.ws_readings) == self.mov_avg: 
+                self.avg_wind_speed = round(mean(self.ws_readings),2) # averaging over 8 sample of 3 second wind
+                self.gust_speed = round(max(self.ws_readings),2)
+                # print(self.ws_readings)
+                self.ws_readings.pop(0)
+                print(self.avg_wind_speed, self.gust_speed)
+        
 
