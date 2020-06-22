@@ -4,8 +4,9 @@ import RPi.GPIO as GPIO
 
 class get_rain():
 
+    rain_tick = 0
+    
     def __init__(self):
-        self.rain_tick = 0     # Used to count the number of times the wind speed input is triggered
         self.interval = 3      # Seconds to be waited between speed measurements
         self.rain_count = 240  # Measure rain over 1 hour - 240
         self.midnight_rain = 0
@@ -25,7 +26,6 @@ class get_rain():
         GPIO.add_event_callback(17, self.rain_trig)  
 
     def rain_trig(self, pin):
-        global rain_tick
         self.rain_tick += 1
 
     def hours_from_midnight(self, current_time):

@@ -5,10 +5,12 @@ from statistics import mean
 
 
 class wind_speed():
+
+    wind_tick = 0
     
     def __init__(self):
         # Initialization
-        self.wind_tick = 0   # Used to count the number of times the wind speed input is triggered
+        # self.wind_tick = 0   # Used to count the number of times the wind speed input is triggered
         self.interval = 3    # Seconds to be waited between speed measurements
         self.mov_avg = 8    # Every 24 second average
         self.ws_readings = []
@@ -23,7 +25,6 @@ class wind_speed():
         GPIO.add_event_callback(17, self.wind_trig) 
 
     def wind_trig(self, pin):   # test is the pin number, in this case 17, passed by the callback function
-        global wind_tick
         self.wind_tick += 1
 
     

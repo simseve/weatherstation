@@ -1,12 +1,12 @@
 import temp_pres
 import wind_direction
-# import wind_speed
+import wind_speed
 import rain
 
 
 # Read Wind Spedd
-# anemometer = wind_speed.wind_speed()
-# anemometer.run()
+anemometer = wind_speed.wind_speed()
+anemometer.run()
 
 # Read Wind Direction
 direction = wind_direction.wind_direction()
@@ -19,7 +19,7 @@ temp, press, alt = t_p.get_bme280()
 print(temp, press, alt)
 
 #Read Rain
-rain = rain.get_rain()
-rain.run()
+# rain = rain.get_rain()
+# rain.run()
 
 
