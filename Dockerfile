@@ -1,5 +1,5 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.8.3-buster
+FROM python:3.8-slim-buster
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -9,9 +9,8 @@ ENV PYTHONUNBUFFERED 1
 
 # Install pip requirements
 ADD requirements.txt .
+RUN apt-get update && apt-get -y install gcc
 RUN python -m pip install -r requirements.txt
-RUN sudo chgrp i2c /dev/i2c-1
-RUN sudo chmod 666 /dev/i2c-1
 
 WORKDIR /app
 ADD . /app
