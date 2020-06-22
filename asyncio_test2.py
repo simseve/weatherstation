@@ -23,21 +23,25 @@ async def main():
     asyncio.ensure_future(speed_forever())  # fire and forget
     asyncio.ensure_future(rain_forever())  # fire and forget
 
+    rain = None       # *** 
+    speed = None      # ***
     while True:
         print("*" * 40)
 
-        # *** - get data from the queues 
+        # *** Read stuff from the queues. Here, I'm just using the latest
+        # item in the queue - but one can do other things as well. 
         while not rain_q.empty(): 
             rain = await rain_q.get()
-            print(f"Rain was {rain}")
+        
         while not speed_q.empty(): 
             speed = await speed_q.get()
-            print(f"Speed was {speed}")
 
-
+        print(f"*** Last rain was {rain}")            
+        print(f"*** Last speed was {speed}")
         print("Sending Data.....")    #Here I'd like to get access to rain and speed variable by using a queue
         print("*" * 40)
         await asyncio.sleep(5)
+
      
 
 if __name__ == '__main__':

@@ -29,6 +29,7 @@ def calculate_elapse(channel):				# callback function
         print(start_timer)
         speed = pulse * 2.4 / elapse
         pulse = 0
+        
 
 
 
