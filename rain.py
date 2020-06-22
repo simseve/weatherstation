@@ -19,7 +19,7 @@ class get_rain():
         GPIO.setmode(GPIO.BCM)
 
         #For rain use pin GPIO23
-        GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
         # Event to detect wind (2 ticks per revolution)
         GPIO.add_event_detect(17, GPIO.FALLING) 

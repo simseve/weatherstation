@@ -26,6 +26,7 @@ class wind_speed():
 
     def wind_trig(self, pin):   # test is the pin number, in this case 17, passed by the callback function
         self.wind_tick += 1
+        print(self.wind_tick)
 
     
     def run(self):

@@ -9,7 +9,7 @@ class get_temp_pres():
         self.sensor = adafruit_bme280.Adafruit_BME280_I2C(self.i2c, address=0x76)
 
     def get_bme280(self):
-        return self.sensor.temperature, self.sensor.pressure, self.sensor.altitude
+        return self.sensor.temperature, self.sensor.pressure, self.sensor.altitude, self.sensor.humidity
 
     
 
