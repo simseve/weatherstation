@@ -9,7 +9,7 @@ rpm = 0
 elapse = 0
 sensor = 17
 pulse = 0
-start_timer = time.time()
+start_timer = time.perf_counter()
 speed = 0
 
 
@@ -23,8 +23,10 @@ def calculate_elapse(channel):				# callback function
     global pulse, start_timer, elapse, speed
     pulse += 1								# increase pulse by 1 whenever interrupt occurred
     if pulse == 4:        
-        elapse = time.time() - start_timer		# elapse for every 1 complete rotation made!
-        start_timer = time.time()				# let current time equals to start_timer
+        elapse = time.perf_counter() - start_timer		# elapse for every 1 complete rotation made!
+        print(elapse)
+        start_timer = time.perf_counter()				# let current time equals to start_timer
+        print(start_timer)
         speed = pulse * 2.4 / elapse
         pulse = 0
 
