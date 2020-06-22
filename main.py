@@ -21,5 +21,3 @@ print(temp, press, alt, hum)
 #Read Rain
 # rain = rain.get_rain()
 # rain.run()
-
-
