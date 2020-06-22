@@ -17,7 +17,7 @@ GPIO.add_event_detect(17, GPIO.BOTH)
 def wind_trig(self):   # test is the pin number, in this case 17, passed by the callback function
     global wind_tick
     wind_tick += 1
-    print(wind_tick)
+    # print(wind_tick)
 
 GPIO.add_event_callback(17, wind_trig) 
 
